@@ -1,0 +1,32 @@
+<!-- .ngt stands for angular template, .html-files and {{}}'s would get processed by backlift -->
+<div id="wrapper">
+
+	<div id="header">
+		<small>Disposable lists. The url below points to this unique list, feel free to share it.</small>
+		<h1>{{url}}</h1>
+	</div>
+
+	<div id="add">
+		<form class="form-inline" ng-submit="addNewItem()">
+			<input type="text" ng-model="itemText" placeholder="Add new item" />
+			<button class="btn btn-primary" type="submit"><i class="icon-plus icon-white"></i> Add</button>
+		</form>
+	</div>
+
+	<ul id="list">
+		<li ng-repeat="item in items | filter:{archived:false} | orderBy:'_created':true" class="starred-{{item.starred}} deleted-{{item.deleted}}">
+			{{item.text}}
+			<span class="date">{{item._created | date:'medium'}}</span>
+
+			<div class="action">
+				<a href="" ng-click="updateDeleted(item)"><i class="icon-remove"></i></a> 
+				<a href="" ng-click="updateStarred(item)"><i class="icon-star"></i></a>
+			</div>
+		</li>
+	</ul>
+
+	<div id="settings">
+		<button href="" class="btn" ng-click="archiveDeleted()"><i class="icon-trash"></i> Archive deleted</button>
+	</div>
+
+</div>
