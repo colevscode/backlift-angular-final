@@ -1,6 +1,6 @@
 function ListController($scope, $routeParams, ListItems){
 
-	$scope.url = window.location.origin+'/'+$routeParams.listid;
+	$scope.url = 'https://'+window.location.host+'/'+$routeParams.listid;
 
 	var listItems = ListItems.bind({listid:$routeParams.listid});
 	$scope.items = listItems.get({});
@@ -10,6 +10,7 @@ function ListController($scope, $routeParams, ListItems){
 			'text':$scope.itemText,
 			'deleted':false,
 			'archived':false,
+			'starred':false
 		}	
 
 		newitem = listItems.post(newitem)
@@ -27,8 +28,21 @@ function ListController($scope, $routeParams, ListItems){
 		}
 	}
 
+	$scope.hasItems = function(){
+		if($scope.items.length==0){
+			return 'block';
+		}
+		return 'none';
+		
+	}
+
 	$scope.updateDeleted = function(item){
 		item.deleted = !item.deleted;
+		item.$put()
+	}
+
+	$scope.updateStarred = function(item){
+		item.starred = !item.starred;
 		item.$put()
 	}
 }
