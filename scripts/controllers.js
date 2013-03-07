@@ -1,5 +1,3 @@
-angular.module('ListController', ['ngResource']);
-
 function ListController($scope, $routeParams, ListItems){
 
 	$scope.url = window.location.origin+'/'+$routeParams.listid;
@@ -10,7 +8,6 @@ function ListController($scope, $routeParams, ListItems){
 	$scope.addNewItem = function(){
 		newitem = {
 			'text':$scope.itemText,
-			'starred':false,
 			'deleted':false,
 			'archived':false,
 		}	
@@ -28,11 +25,6 @@ function ListController($scope, $routeParams, ListItems){
 				$scope.items[i].$put()
 			}
 		}
-	}
-
-	$scope.updateStarred = function(item){
-		item.starred = !item.starred;
-		item.$put()
 	}
 
 	$scope.updateDeleted = function(item){

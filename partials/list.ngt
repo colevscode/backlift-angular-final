@@ -14,13 +14,12 @@
 	</div>
 
 	<ul id="list">
-		<li ng-repeat="item in items | filter:{archived:false} | orderBy:'_created':true" class="starred-{{item.starred}} deleted-{{item.deleted}}">
+		<li ng-repeat="item in items | filter:{archived:false} | orderBy:'_created':true" class="deleted-{{item.deleted}}">
 			{{item.text}}
 			<span class="date">{{item._created | date:'medium'}}</span>
 
 			<div class="action">
 				<a href="" ng-click="updateDeleted(item)"><i class="icon-remove"></i></a> 
-				<a href="" ng-click="updateStarred(item)"><i class="icon-star"></i></a>
 			</div>
 		</li>
 	</ul>
