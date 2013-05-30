@@ -1,33 +1,21 @@
-<!-- .ngt stands for angular template, .html-files and {{}}'s would get processed by backlift -->
-<div class="row header">
-	<div class="wrapper">
+<div class="wrapper">
+    <button class="btn btn-delete right" href="" ng-click="archiveItems()">Archive deleted</button>
 
-		<div id="header">
-			<small>This is a list. It's live and online. Share it using the url below.</small>
-			<h1><input type="text" value="{{url}}" /></h1>
-		</div>
+    <form ng-submit="addNewItem()">
+        <input type="text" ng-model="itemText" placeholder="Add item" />
+        <button type="submit" class="btn">Add</button>
+    </form>
 
-		<div id="add">
-			<button href="" class="btn btn-delete right" ng-click="archiveDeleted()">Archive deleted</button>
-			<form ng-submit="addNewItem()">
-				<input type="text" ng-model="itemText" placeholder="Add new item" />
-				<button href="" class="btn btn-primary" type="submit">Add</button>
-			</form>
-		</div>
-	</div>
-</div>
-<div class="row">
-	<div class="wrapper">
-		<ul id="list">
-			<p style="text-align: center; display:{{hasItems()}}">Add new items to list</p>
-			<li ng-repeat="item in items | filter:{archived:false} | orderBy:'_created':true" class="deleted-{{item.deleted}} starred-{{item.starred}}">
-				{{item.text}}
-				<span class="date">{{item._created | date:'medium'}}</span>
-				<div class="action">
-					<a href="" ng-click="updateDeleted(item)"><i class="icon-remove"></i></a> 
-					<a href="" ng-click="updateStarred(item)"><i class="icon-star"></i></a>
-				</div>
-			</li>
-		</ul>
-	</div>
+    <style>
+        .deleted-true {
+            opacity: 0.2;
+        }
+    </style>
+
+    <ul>
+        <li ng-repeat="item in items | filter:{archived:false}" class="deleted-{{item.deleted}}">
+            {{item.text}}
+            <a href="" ng-click="deleteItem(item)">(del)</a>
+        </li>
+    </ul>
 </div>
