@@ -1,5 +1,7 @@
 function ListController($scope, $routeParams, ListItems){
 
+    $scope.url = 'https://'+window.location.host+'/'+$routeParams.listid;
+
     var ListItems = ListItems.bind({listid:$routeParams.listid});
     $scope.items = ListItems.query();
 
